@@ -12,7 +12,7 @@ class DeviceService {
           .get(Uri.parse('https://jsonplaceholder.typicode.com/todos'));
       if (response.statusCode == 200) {
         List jsonResponse = convert.jsonDecode(response.body) as List<dynamic>;
-        List<Device> devices = jsonResponse.map(fromJsonData).toList().sublist(0, 4);
+        List<Device> devices = jsonResponse.map(fromJsonData).toList();
         return devices;
       } else {
         logger.e('Request failed with status: ${response.statusCode}.');

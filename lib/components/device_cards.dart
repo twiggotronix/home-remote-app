@@ -6,15 +6,22 @@ class DeviceCards extends StatelessWidget {
   final List<Device> devices;
   final Function updateDeviceState;
 
-  const DeviceCards({super.key, required this.devices, required this.updateDeviceState});
+  const DeviceCards(
+      {super.key, required this.devices, required this.updateDeviceState});
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: devices.map((device) => DeviceCard(
-      device: device,
-      updateDeviceState: (newState) {
-        updateDeviceState(device, newState);
-      },
-    )).toList());
+    return GridView.builder(
+        itemCount: devices.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          Device device = devices[index];
+          return  DeviceCard(
+                  device: device,
+                  updateDeviceState: (newState) {
+                    updateDeviceState(device, newState);
+                  },
+                );
+    });
   }
 }
